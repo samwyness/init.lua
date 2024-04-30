@@ -20,10 +20,10 @@ return { -- Autoformat
       --
       -- You can use a sub-list to tell conform to run *until* a formatter
       -- is found.
-      javascript = { { 'prettier_d', 'prettier' } },
-      typescript = { { 'prettier_d', 'prettier' } },
-      javascriptreact = { { 'prettier_d', 'prettier' } },
-      typescriptreact = { { 'prettier_d', 'prettier' } },
+      javascript = { { 'prettier' } },
+      typescript = { { 'prettier' } },
+      javascriptreact = { { 'prettier' } },
+      typescriptreact = { { 'prettier' } },
     },
   },
 }
