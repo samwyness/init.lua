@@ -21,4 +21,8 @@ return {
       typescriptreact = { { 'prettier' } },
     },
   },
+
+  config = function(_, opts)
+    require("conform").setup(opts)
+  end
 }
