@@ -4,10 +4,10 @@ function ColorMyPencils(color)
   vim.api.nvim_set_hl(0, 'Normal', { bg = 'none' })
   vim.api.nvim_set_hl(0, 'NormalFloat', { bg = 'none' })
 
+  vim.api.nvim_set_hl(0, 'LineNr', { fg = '#6c7086' })
+  vim.api.nvim_set_hl(0, 'LineNrAbove', { fg = '#6c7086' })
+  vim.api.nvim_set_hl(0, 'LineNrBelow', { fg = '#6c7086' })
   vim.api.nvim_set_hl(0, 'CursorLineNr', { fg = 'white' })
-  vim.api.nvim_set_hl(0, 'LineNrAbove', { fg = '#565f89' })
-  vim.api.nvim_set_hl(0, 'LineNr', { fg = 'white' })
-  vim.api.nvim_set_hl(0, 'LineNrBelow', { fg = '#565f89' })
 
   vim.api.nvim_set_hl(0, 'GitSignsAdd', { fg = '#9ece6a' })
   vim.api.nvim_set_hl(0, 'GitSignsChange', { fg = '#ff9e64' })
@@ -44,11 +44,14 @@ return {
   {
     'rose-pine/neovim',
     name = 'rose-pine',
+    lazy = false,
+    priority = 1000,
     config = function()
       require('rose-pine').setup {
         enable = {
           transparency = true,
         },
+        disable_background = true,
         styles = {
           italic = false,
         },
@@ -63,9 +66,6 @@ return {
       }
 
       local theme_name = 'rose-pine-moon'
-
-      vim.cmd.colorscheme(theme_name)
-
       ColorMyPencils(theme_name)
     end,
   },
