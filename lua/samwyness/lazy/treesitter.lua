@@ -1,4 +1,4 @@
-return { -- Highlight, edit, and navigate code
+return {
   'nvim-treesitter/nvim-treesitter',
   event = { 'BufReadPre', 'BufNewFile' },
   build = ':TSUpdate',
@@ -49,8 +49,6 @@ return { -- Highlight, edit, and navigate code
   },
 
   config = function(_, opts)
-    -- [[ Configure Treesitter ]] See `:help nvim-treesitter`
-
     ---@diagnostic disable-next-line: missing-fields
     require('nvim-treesitter.configs').setup(opts)
 
