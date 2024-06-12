@@ -28,10 +28,10 @@ return {
       require('mason').setup()
       require('mason-lspconfig').setup()
 
+      local lspconfig = require 'lspconfig'
+
       local capabilities = vim.lsp.protocol.make_client_capabilities()
       capabilities = vim.tbl_deep_extend('force', {}, capabilities, require('cmp_nvim_lsp').default_capabilities())
-
-      local lspconfig = require 'lspconfig'
 
       local inlayHints = {
         includeInlayEnumMemberValueHints = true,
@@ -44,54 +44,50 @@ return {
         includeInlayVariableTypeHintsWhenTypeMatchesName = false,
       }
 
-      lspconfig.tsserver.setup {
-        capabilities = capabilities,
-        settings = {
-          completion = {
-            completeFunctionCalls = true,
-          },
-          javascript = {
-            inlayHints = inlayHints,
-          },
-          typescript = {
-            inlayHints = inlayHints,
-          },
-        },
-      }
+      -- Enable the following language servers
+      local servers = {
+        gopls = {},
+        html = {},
 
-      lspconfig.eslint.setup {
-        capabilities = capabilities,
-        on_attach = function(_, bufnr)
-          vim.api.nvim_create_autocmd('BufWritePre', {
-            buffer = bufnr,
-            command = 'EslintFixAll',
-          })
-        end,
-      }
-
-      lspconfig.gopls.setup {
-        capabilities = capabilities,
-      }
-
-      lspconfig.html.setup {
-        capabilities = capabilities,
-      }
-
-      -- lspconfig.stylua.setup {
-      --   capabilities = capabilities,
-      -- }
-
-      lspconfig.lua_ls.setup {
-        capabilities = capabilities,
-        settings = {
-          Lua = {
-            completion = {
-              callSnippet = 'Replace',
+        lua_ls = {
+          settings = {
+            Lua = {
+              completion = {
+                callSnippet = 'Replace',
+              },
+              hint = { enable = true },
             },
-            hint = { enable = true },
           },
         },
+
+        tsserver = {
+          settings = {
+            completion = {
+              completeFunctionCalls = true,
+            },
+            javascript = {
+              inlayHints = inlayHints,
+            },
+            typescript = {
+              inlayHints = inlayHints,
+            },
+          },
+        },
+
+        eslint = {
+          on_attach = function(_, bufnr)
+            vim.api.nvim_create_autocmd('BufWritePre', {
+              buffer = bufnr,
+              command = 'EslintFixAll',
+            })
+          end,
+        },
       }
+
+      for name, opts in pairs(servers) do
+        opts.capabilities = capabilities
+        lspconfig[name].setup(opts)
+      end
 
       -- Add keymaps when lsp is attached to the buffer
       vim.api.nvim_create_autocmd('LspAttach', {
