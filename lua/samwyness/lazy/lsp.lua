@@ -4,12 +4,19 @@ return {
     opts = {},
   },
   {
+    'filipdutescu/renamer.nvim',
+    dependencies = { 'nvim-lua/plenary.nvim' },
+    opts = {},
+  },
+  {
     'neovim/nvim-lspconfig',
     lazy = false,
     dependencies = {
       'williamboman/mason.nvim',
       'williamboman/mason-lspconfig.nvim',
       'hrsh7th/cmp-nvim-lsp',
+      'j-hui/fidget.nvim',
+      'filipdutescu/renamer.nvim',
       {
         -- `neodev` configures Lua LSP for your Neovim config, runtime and plugins
         -- used for completion, annotations and signatures of Neovim apis
@@ -98,10 +105,10 @@ return {
 
           map('<leader>gd', vim.lsp.buf.definition, '[G]oto [D]efinition')
           map('<leader>gr', vim.lsp.buf.references, '[G]oto [R]eferences')
-          map('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
+          map('<leader>rn', '<cmd>lua require("renamer").rename()<cr>', '[R]e[n]ame')
           map('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ctions')
-
-          -- Some typescript specific code actions
+          
+          -- Typescript specific code actions
           map('<leader>co', function()
             vim.lsp.buf.code_action {
               apply = true,
