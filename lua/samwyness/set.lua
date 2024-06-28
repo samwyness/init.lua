@@ -43,7 +43,7 @@ vim.opt.incsearch = true
 
 -- Columns
 vim.opt.signcolumn = 'yes'
-vim.opt.colorcolumn = '100'
+-- vim.opt.colorcolumn = '100'
 
 vim.opt.updatetime = 50
 vim.opt.timeoutlen = 300
