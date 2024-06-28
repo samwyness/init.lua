@@ -93,17 +93,31 @@ return {
       vim.api.nvim_create_autocmd('LspAttach', {
         group = vim.api.nvim_create_augroup('samwyness-lsp-attach', { clear = true }),
         callback = function(event)
+          local telescopeBuiltin = require 'telescope.builtin'
+
           local map = function(keys, func, desc)
             vim.keymap.set('n', keys, func, { buffer = event.buf, desc = 'LSP: ' .. desc })
           end
 
           map('K', vim.lsp.buf.hover, 'Hover Documentation')
+          -- Change border of documentation hover window, See https://github.com/neovim/neovim/pull/13998.
+          vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, {
+            border = 'rounded',
+          })
 
-          map('<leader>gd', vim.lsp.buf.definition, '[G]oto [D]efinition')
-          map('<leader>gr', vim.lsp.buf.references, '[G]oto [R]eferences')
-          map('<leader>rn', '<cmd>lua require("renamer").rename()<cr>', '[R]e[n]ame')
+          map('<leader>gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
+
+          map('<leader>gd', telescopeBuiltin.lsp_definitions, '[G]oto [D]efinition')
+          map('<leader>gr', telescopeBuiltin.lsp_references, '[G]oto [R]eferences')
+          map('<leader>gI', telescopeBuiltin.lsp_implementations, '[G]oto [I]mplementation')
+          map('<leader>td', telescopeBuiltin.lsp_type_definitions, 'Type [D]efinition')
+          map('<leader>ds', telescopeBuiltin.lsp_document_symbols, '[D]ocument [S]ymbols')
+          map('<leader>ws', telescopeBuiltin.lsp_dynamic_workspace_symbols, '[W]orkspace [S]ymbols')
+
+          map('<leader>rn', require('renamer').rename, '[R]e[n]ame')
+
           map('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ctions')
-          
+
           -- Typescript specific code actions
           map('<leader>co', function()
             vim.lsp.buf.code_action {
@@ -124,12 +138,6 @@ return {
               },
             }
           end, '[C]ode [R]emove unused imports')
-
-          local telescopeBuiltin = require 'telescope.builtin'
-          map('<leader>gI', telescopeBuiltin.lsp_implementations, '[G]oto [I]mplementation')
-          map('<leader>D', telescopeBuiltin.lsp_type_definitions, 'Type [D]efinition')
-          map('<leader>ds', telescopeBuiltin.lsp_document_symbols, '[D]ocument [S]ymbols')
-          map('<leader>ws', telescopeBuiltin.lsp_dynamic_workspace_symbols, '[W]orkspace [S]ymbols')
 
           map('<leader>h', function()
             ---@diagnostic disable-next-line: param-type-mismatch
