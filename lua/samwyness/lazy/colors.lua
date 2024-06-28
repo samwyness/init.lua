@@ -1,45 +1,37 @@
-function ColorMyPencils(color)
-  vim.cmd.colorscheme(color)
-
-  vim.api.nvim_set_hl(0, 'Normal', { bg = 'none' })
-  vim.api.nvim_set_hl(0, 'NormalFloat', { bg = 'none' })
-
-  vim.api.nvim_set_hl(0, 'LineNr', { fg = '#6c7086' })
-  vim.api.nvim_set_hl(0, 'LineNrAbove', { fg = '#6c7086' })
-  vim.api.nvim_set_hl(0, 'LineNrBelow', { fg = '#6c7086' })
-  vim.api.nvim_set_hl(0, 'CursorLineNr', { fg = 'white' })
-
-  vim.api.nvim_set_hl(0, 'GitSignsAdd', { fg = '#9ece6a' })
-  vim.api.nvim_set_hl(0, 'GitSignsChange', { fg = '#ff9e64' })
-  vim.api.nvim_set_hl(0, 'GitSignsDelete', { fg = '#db4b4b' })
+function ThrowPaint(color)
+  vim.cmd.colorscheme(color or 'rose-pine-moon')
 end
 
 return {
-  -- {
-  --   'folke/tokyonight.nvim',
-  --   lazy = false,
-  --   priority = 1000,
-  --   config = function()
-  --     require('tokyonight').setup {
-  --       -- your configuration comes here
-  --       -- or leave it empty to use the default settings
-  --       style = 'storm', -- The theme comes in three styles, `storm`, `moon`, a darker variant `night` and `day`
-  --       transparent = true, -- Enable this to disable setting the background color
-  --       terminal_colors = true, -- Configure the colors used when opening a `:terminal` in Neovim
-  --       styles = {
-  --         -- Style to be applied to different syntax groups
-  --         -- Value is any valid attr-list value for `:help nvim_set_hl`
-  --         comments = { italic = false },
-  --         keywords = { italic = false },
-  --         -- Background styles. Can be "dark", "transparent" or "normal"
-  --         sidebars = 'dark', -- style for sidebars, see below
-  --         floats = 'dark', -- style for floating windows
-  --       },
-  --     }
-  --
-  --     ColorMyPencils 'tokyonight'
-  --   end,
-  -- },
+  {
+    'folke/tokyonight.nvim',
+    lazy = false,
+    priority = 1000,
+    config = function()
+      require('tokyonight').setup {
+        -- your configuration comes here
+        -- or leave it empty to use the default settings
+        style = 'storm', -- The theme comes in three styles, `storm`, `moon`, a darker variant `night` and `day`
+        transparent = true, -- Enable this to disable setting the background color
+        terminal_colors = true, -- Configure the colors used when opening a `:terminal` in Neovim
+        styles = {
+          -- Style to be applied to different syntax groups
+          -- Value is any valid attr-list value for `:help nvim_set_hl`
+          comments = { italic = false },
+          keywords = { italic = false },
+          -- Background styles. Can be "dark", "transparent" or "normal"
+          sidebars = 'dark', -- style for sidebars, see below
+          floats = 'dark', -- style for floating windows
+        },
+      }
+    end,
+  },
+
+  {
+    'catppuccin/nvim',
+    name = 'catppuccin',
+    priority = 1000,
+  },
 
   {
     'rose-pine/neovim',
@@ -48,12 +40,10 @@ return {
     priority = 1000,
     config = function()
       require('rose-pine').setup {
-        enable = {
-          transparency = true,
-        },
         disable_background = true,
         styles = {
           italic = false,
+          transparency = true,
         },
         highlight_groups = {
           TelescopeBorder = { fg = 'highlight_high', bg = 'none' },
@@ -65,8 +55,7 @@ return {
         },
       }
 
-      local theme_name = 'rose-pine-moon'
-      ColorMyPencils(theme_name)
+      ThrowPaint 'rose-pine-moon'
     end,
   },
 }
