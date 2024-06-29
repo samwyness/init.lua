@@ -5,7 +5,7 @@ vim.g.have_nerd_font = false
 
 vim.opt.showmode = false
 
-vim.opt.scrolloff = 100
+vim.opt.scrolloff = 10
 
 vim.opt.termguicolors = true
 
