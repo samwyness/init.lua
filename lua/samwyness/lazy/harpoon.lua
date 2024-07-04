@@ -52,8 +52,7 @@ return {
               local current_picker = state.get_current_picker(prompt_buffer_number)
 
               harpoon:list():remove_at(selected_entry.index)
-              -- current_picker:refresh(make_finder())
-              current_picker:remove_at(selected_entry.index)
+              current_picker:refresh(make_finder())
             end)
 
             return true
