@@ -2,7 +2,11 @@ return {
   'folke/which-key.nvim',
   event = 'VimEnter',
   config = function()
-    require('which-key').setup()
+    require('which-key').setup {
+      icons = {
+        mappings = false,
+      },
+    }
 
     -- Document existing key chains
     require('which-key').add {
