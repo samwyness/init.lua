@@ -1,5 +1,5 @@
 function ThrowPaint(color)
-  vim.cmd.colorscheme(color or 'rose-pine-moon')
+  vim.cmd.colorscheme(color or 'rose-pine')
 end
 
 return {
@@ -36,7 +36,7 @@ return {
         flavour = 'auto', -- latte, frappe, macchiato, mocha
         background = { -- :h background
           light = 'latte',
-          dark = 'macchiato',
+          dark = 'mocha',
         },
         no_italic = true, -- Force no italic
         no_bold = true, -- Force no bold
