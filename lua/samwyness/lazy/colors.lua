@@ -1,5 +1,5 @@
 function ThrowPaint(color)
-  vim.cmd.colorscheme(color or 'rose-pine')
+  vim.cmd.colorscheme(color or 'rose-pine-main')
 end
 
 return {
@@ -67,7 +67,7 @@ return {
         },
       }
 
-      ThrowPaint 'rose-pine-moon'
+      ThrowPaint 'rose-pine-main'
     end,
   },
 }
