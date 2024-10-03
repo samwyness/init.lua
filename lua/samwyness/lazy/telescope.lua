@@ -59,7 +59,7 @@ return {
 
     vim.keymap.set('n', '<leader><leader>', builtin.buffers, { desc = '[ ] Find existing buffers' })
 
-    vim.keymap.set('n', '<leader>sb', builtin.git_files, { desc = '[S]each Git [B]ranches' })
+    vim.keymap.set('n', '<leader>sb', builtin.git_branches, { desc = '[S]each Git [B]ranches' })
     vim.keymap.set('n', '<leader>sd', builtin.diagnostics, { desc = '[S]earch [D]iagnostics' })
     vim.keymap.set('n', '<leader>sf', builtin.find_files, { desc = '[S]earch [F]iles' })
     vim.keymap.set('n', '<leader>sg', builtin.live_grep, { desc = '[S]earch by [G]rep' })
